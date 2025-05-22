@@ -7,7 +7,7 @@ This repository contains a comprehensive analysis framework that investigates th
 
 ## File Overview
 
-### 1. **`amazon_visuals.py`**
+### 1. **`Charts.py`**
 **Purpose**: Visualizes Amazon’s financial trends such as Free Cash Flow, Revenue, EBIT, Capex, and R&D spending.
 - **Key Plots**:
   - Free Cash Flow with rolling mean & volatility
@@ -18,7 +18,7 @@ This repository contains a comprehensive analysis framework that investigates th
 
 ---
 
-### 2. **`financial_metrics_extraction.py`**
+### 2. **`Financial_metrics_extraction.py`**
 **Purpose**: Constructs comparative box plots for Amazon vs. dividend-initiating firms across:
 - Profitability and Interest Coverage (`Fig 3`)
 - Maturity Metrics like Revenue Growth & R&D Intensity (`Fig 6`)
@@ -29,7 +29,7 @@ This repository contains a comprehensive analysis framework that investigates th
 
 ---
 
-### 3. **`nasdaq_dividend_scraper.py`**
+### 3. **`Dividend scraper.py`**
 **Purpose**: Scrapes dividend payment data for NASDAQ-listed companies using Nasdaq’s public API.
 - Saves aggregated quarterly dividend values to:
   - `DATA/outputs/quarterly_dividends.csv`
@@ -38,7 +38,7 @@ This repository contains a comprehensive analysis framework that investigates th
 
 ---
 
-### 4. **`logistic_regression_model.py`**
+### 4. **`Logistic regression.py`**
 **Purpose**: Applies a **Logistic Regression** model with LOOCV to predict dividend initiation based on financial metrics.
 - Includes:
   - Feature selection via ANOVA F-stat
@@ -48,13 +48,21 @@ This repository contains a comprehensive analysis framework that investigates th
 
 ---
 
-### 5. **`random_forest_model.py`**
+### 5. **`randomforest.py`**
 **Purpose**: Implements a **Random Forest Classifier** with 2-instance-per-fold CV.
 - Evaluation includes:
   - Confusion matrix, ROC curve, probability distribution
 - Outputs Amazon’s prediction using the trained model
 - **Complementary to `logistic_regression_model.py` for model comparison**
+---
 
+### 6. **`ML dataset constructor.py`**
+**Purpose**: Constructs the dataset for the data with the correct featureset for the ML models.
+- Data inputs include:
+  - `DATA/Financials/us-balance-quarterly.csv`
+  - `DATA/Financials/us-income-quarterly-fixed.csv`
+- Outputs Dataset for ML models
+- `DATA/outputs/dividend_classification_dataset.csv` 
 ---
 
 ## Directory Structure
