@@ -24,18 +24,18 @@ X = df.drop(columns=["Ticker", "Quarter", "Class"])
 y = df["Class"]
 feature_names = X.columns
 
-# Step 1: Impute missing values
+#Impute missing values
 imputer = SimpleImputer(strategy='mean')
 X_imputed = imputer.fit_transform(X)
 
-# Step 2: Normalize features
+#Normalize features
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X_imputed)
 
-# Step 3: Setup LOOCV
+#Setup LOOCV
 loo = LeaveOneOut()
 
-# Step 4: Build pipeline (Feature selection + Logistic Regression)
+#Build pipeline (Feature selection + Logistic Regression)
 selector = SelectKBest(score_func=f_classif, k=9)
 clf = LogisticRegression(max_iter=1000)
 pipeline = Pipeline([
@@ -43,7 +43,7 @@ pipeline = Pipeline([
     ("clf", clf)
 ])
 
-# Step 5: Perform LOOCV
+#Perform LOOCV
 y_true, y_pred, y_prob = [], [], []
 
 for train_idx, test_idx in loo.split(X_scaled):
@@ -55,7 +55,7 @@ for train_idx, test_idx in loo.split(X_scaled):
     y_pred.append(pipeline.predict(X_test)[0])
     y_prob.append(pipeline.predict_proba(X_test)[0][1])
 
-# Step 6: Evaluate model
+#Evaluate model
 accuracy = accuracy_score(y_true, y_pred)
 roc_auc = roc_auc_score(y_true, y_prob)
 cm = confusion_matrix(y_true, y_pred)
@@ -117,7 +117,7 @@ plt.show()
 
 # === Predict Amazon ===
 
-# Step 1: Create Amazon's input data using the same features
+#Create Amazon's input data using the same features
 amazon_data = {
     "Gross Margin": 0.49,
     "Operating Margin": 0.11,
@@ -134,7 +134,7 @@ amazon_data = {
 # Ensure correct order of columns
 amazon_df = pd.DataFrame([amazon_data])[feature_names]
 
-# Step 2: Apply same preprocessing: impute -> scale -> select features
+#Apply same preprocessing: impute -> scale -> select features
 amazon_imputed = imputer.transform(amazon_df)
 amazon_scaled = scaler.transform(amazon_imputed)
 
@@ -144,7 +144,7 @@ pipeline.fit(X_scaled, y)
 # Select features from Amazon
 amazon_selected = selector.transform(amazon_scaled)
 
-# Step 3: Predict
+#Predict
 amazon_prob = clf.predict_proba(amazon_selected)[0][1]
 amazon_class = clf.predict(amazon_selected)[0]
 

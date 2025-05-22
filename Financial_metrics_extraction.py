@@ -20,7 +20,6 @@ balance_df = convert_to_quarter(balance_df)
 sorted_income_quarters = sorted(financials_df["Quarter"].unique())
 sorted_balance_quarters = sorted(balance_df["Quarter"].unique())
 
-# === File 1: Profitability & Interest Coverage ===
 income_metrics = []
 
 for _, row in dividend_df.iterrows():
@@ -54,7 +53,6 @@ amazon_income = {
     "Interest Coverage Ratio": 34.02
 }
 
-# === File 2: Maturity Metrics ===
 financials_df.sort_values(by=["Ticker", "Fiscal Year", "Fiscal Period"], inplace=True)
 financials_df["Prior Revenue"] = financials_df.groupby("Ticker")["Revenue"].shift(4)
 financials_df["Revenue Growth"] = (financials_df["Revenue"] - financials_df["Prior Revenue"]) / financials_df["Prior Revenue"]
@@ -86,7 +84,6 @@ amazon_maturity = {
     "SG&A / Revenue": 0.0796
 }
 
-# === File 3: Financial Health ===
 balance_df["Quick Ratio"] = (balance_df["Total Current Assets"] - balance_df["Inventories"]) / balance_df["Total Current Liabilities"]
 balance_df["Debt to Equity"] = balance_df["Total Liabilities"] / balance_df["Total Equity"]
 balance_df["Retention Ratio"] = balance_df["Retained Earnings"] / balance_df["Total Assets"]
