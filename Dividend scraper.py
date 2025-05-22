@@ -104,7 +104,7 @@ for idx, ticker in enumerate(tickers):
         # Save after each ticker
         main_df.to_csv(OUTPUT_FILE)
         print(f"  - Valid entries: {valid_count}")
-        print(f"  - ✅ Progress saved to {OUTPUT_FILE}")
+        print(f"  - Progress saved to {OUTPUT_FILE}")
 
         processed += 1
 
@@ -118,7 +118,7 @@ for idx, ticker in enumerate(tickers):
     time.sleep(wait)
 
 # Final Summary
-print(f"\n✅ Finished processing.")
+print(f"\n Finished processing.")
 print(f"  - Tickers processed: {processed}")
 print(f"  - Tickers skipped: {skipped}")
-print(f"📁 Output saved to: {OUTPUT_FILE}")
+print(f" Output saved to: {OUTPUT_FILE}")
